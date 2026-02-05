@@ -1,0 +1,29 @@
+@reference "../../app/globals.css";
+
+.skeleton {
+  @apply bg-lighter rounded;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.text {
+  @apply h-4 rounded;
+}
+
+.circular {
+  @apply rounded-full;
+  aspect-ratio: 1;
+}
+
+.rectangular {
+  @apply w-full h-32;
+}
