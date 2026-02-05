@@ -1,0 +1,22 @@
+@reference "../../app/globals.css";
+
+.inputGroup {
+  @apply flex flex-col gap-1 mb-4;
+}
+
+.label {
+  @apply text-sm font-medium text-heading;
+}
+
+.input {
+  @apply px-4 py-2 rounded-lg bg-lighter border border-lighter text-heading;
+  @apply focus:outline-none focus:border-primary;
+}
+
+.input.hasError {
+  @apply border-error;
+}
+
+.error {
+  @apply text-error text-sm;
+}

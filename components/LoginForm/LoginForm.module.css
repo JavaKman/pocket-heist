@@ -1,0 +1,13 @@
+@reference "../../app/globals.css";
+
+.form {
+  @apply w-full max-w-md mx-auto;
+}
+
+.footer {
+  @apply text-center mt-6 text-body;
+}
+
+.link {
+  @apply text-primary hover:text-secondary transition-colors;
+}

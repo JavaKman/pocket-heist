@@ -175,7 +175,7 @@ export default function LoginPage() {
   return (
     <div className="center-content">
       <div className="page-content">
-        <h1 className="form-title">Log in to Your Account</h1>
+        <h2 className="form-title">Log in to Your Account</h2>
         <LoginForm />
       </div>
     </div>
@@ -194,7 +194,7 @@ export default function SignupPage() {
   return (
     <div className="center-content">
       <div className="page-content">
-        <h1 className="form-title">Signup for an Account</h1>
+        <h2 className="form-title">Signup for an Account</h2>
         <SignupForm />
       </div>
     </div>
