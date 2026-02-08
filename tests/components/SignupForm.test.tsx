@@ -1,9 +1,30 @@
 import { render, screen, waitFor } from "@testing-library/react"
-import { describe, it, expect, vi } from "vitest"
+import { describe, it, expect, vi, beforeEach } from "vitest"
 import userEvent from "@testing-library/user-event"
 import SignupForm from "@/components/SignupForm"
 
+// Mock Next.js router
+const mockPush = vi.fn()
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: mockPush,
+  }),
+}))
+
+// Mock Firebase auth
+vi.mock("@/lib/firebase", () => ({
+  auth: {},
+}))
+
+vi.mock("firebase/auth", () => ({
+  createUserWithEmailAndPassword: vi.fn(),
+}))
+
 describe("SignupForm", () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
   it("renders email and password fields", () => {
     render(<SignupForm />)
 
@@ -61,7 +82,9 @@ describe("SignupForm", () => {
   })
 
   it("submits form with valid data", async () => {
-    const consoleSpy = vi.spyOn(console, "log")
+    const { createUserWithEmailAndPassword } = await import("firebase/auth")
+    vi.mocked(createUserWithEmailAndPassword).mockResolvedValue({} as any)
+
     const user = userEvent.setup()
     render(<SignupForm />)
 
@@ -69,20 +92,14 @@ describe("SignupForm", () => {
     await user.type(screen.getByLabelText("Password"), "password123")
     await user.click(screen.getByRole("button", { name: /sign up/i }))
 
-    await waitFor(
-      () => {
-        expect(consoleSpy).toHaveBeenCalledWith(
-          "Signup submitted:",
-          expect.objectContaining({
-            email: "test@example.com",
-            password: "password123",
-          })
-        )
-      },
-      { timeout: 2000 }
-    )
-
-    consoleSpy.mockRestore()
+    await waitFor(() => {
+      expect(createUserWithEmailAndPassword).toHaveBeenCalledWith(
+        {},
+        "test@example.com",
+        "password123"
+      )
+      expect(mockPush).toHaveBeenCalledWith("/heists")
+    })
   })
 
   it("disables form during submission", async () => {

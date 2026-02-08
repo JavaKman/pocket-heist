@@ -6,9 +6,7 @@
       "mcp__context7__query-docs",
       "mcp__figma__get_design_context",
       "mcp__figma__get_screenshot",
-      "mcp__firebase__firebase_login",
-      "mcp__firebase__firebase_get_environment",
-      "mcp__firebase__firebase_create_project"
+      "Bash(npx firebase deploy:*)"
     ]
   }
 }

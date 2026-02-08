@@ -15,7 +15,7 @@ describe("Navbar", () => {
   it("renders the Create Heist link", () => {
     render(<Navbar />)
 
-    const createLink = screen.getByRole("link", { name: /create heist/i })
+    const createLink = screen.getByRole("link", { name: /create new heist/i })
     expect(createLink).toBeInTheDocument()
     expect(createLink).toHaveAttribute("href", "/heists/create")
   })
