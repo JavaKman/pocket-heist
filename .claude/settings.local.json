@@ -1,18 +1,11 @@
 {
   "permissions": {
-    "allow": ["Bash(ls:*)"]
-  },
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "jq -r '.tool_input.filepath' | { read fp; [[ \"$fp\" =~ \\.tsx?$ ]] && npx prettier --write \"$fp\";}"
-          }
-        ]
-      }
+    "allow": [
+      "Bash(ls:*)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "mcp__figma__get_design_context",
+      "mcp__figma__get_screenshot"
     ]
   }
 }

@@ -15,3 +15,14 @@
 svg.logo {
   display: inline-block;
 }
+
+.btn {
+  @apply flex items-center gap-2 px-4 h-10 rounded-[10px] text-white font-normal text-base;
+  background: linear-gradient(90deg, #9810fa 0%, #e60076 100%);
+  letter-spacing: -0.3125px;
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}

@@ -44,4 +44,4 @@ next-env.d.ts
 info/
 
 # claude
-.claude/
+.claude/settings.local.json
