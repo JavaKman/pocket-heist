@@ -1,84 +1,88 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-import { createUserWithEmailAndPassword } from "firebase/auth"
-import { auth } from "@/lib/firebase"
-import Input from "@/components/Input"
-import PasswordInput from "@/components/PasswordInput"
-import Button from "@/components/Button"
-import styles from "./SignupForm.module.css"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import Input from "@/components/Input";
+import PasswordInput from "@/components/PasswordInput";
+import Button from "@/components/Button";
+import styles from "./SignupForm.module.css";
 
 export default function SignupForm() {
-  const router = useRouter()
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-  })
+  });
 
   const [errors, setErrors] = useState({
     email: "",
     password: "",
-  })
+  });
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const validateForm = (): boolean => {
-    const newErrors = { email: "", password: "" }
-    let isValid = true
+    const newErrors = { email: "", password: "" };
+    let isValid = true;
 
     // Email validation
     if (!formData.email) {
-      newErrors.email = "Email is required"
-      isValid = false
+      newErrors.email = "Email is required";
+      isValid = false;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address"
-      isValid = false
+      newErrors.email = "Please enter a valid email address";
+      isValid = false;
     }
 
     // Password validation
     if (!formData.password) {
-      newErrors.password = "Password is required"
-      isValid = false
+      newErrors.password = "Password is required";
+      isValid = false;
     } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters"
-      isValid = false
+      newErrors.password = "Password must be at least 6 characters";
+      isValid = false;
     }
 
-    setErrors(newErrors)
-    return isValid
-  }
+    setErrors(newErrors);
+    return isValid;
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
     if (!validateForm()) {
-      return
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
 
     try {
-      await createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
       // Redirect to heists page on successful signup
-      router.push("/heists")
+      router.push("/heists");
     } catch (error: any) {
       // Handle Firebase auth errors
-      let errorMessage = "Failed to create account. Please try again."
+      let errorMessage = "Failed to create account. Please try again.";
 
       if (error.code === "auth/email-already-in-use") {
-        errorMessage = "An account with this email already exists"
+        errorMessage = "An account with this email already exists";
       } else if (error.code === "auth/invalid-email") {
-        errorMessage = "Invalid email address"
+        errorMessage = "Invalid email address";
       } else if (error.code === "auth/weak-password") {
-        errorMessage = "Password is too weak. Please use a stronger password."
+        errorMessage = "Password is too weak. Please use a stronger password.";
       }
 
-      setErrors({ ...errors, email: error.code === "auth/email-already-in-use" ? errorMessage : "", password: error.code !== "auth/email-already-in-use" ? errorMessage : "" })
-      setLoading(false)
+      setErrors({
+        ...errors,
+        email: error.code === "auth/email-already-in-use" ? errorMessage : "",
+        password: error.code !== "auth/email-already-in-use" ? errorMessage : "",
+      });
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
@@ -118,5 +122,5 @@ export default function SignupForm() {
         </Link>
       </div>
     </form>
-  )
+  );
 }

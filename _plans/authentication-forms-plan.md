@@ -120,7 +120,7 @@ const [loading, setLoading] = useState(false);
 **Submit Handler:**
 
 ```typescript
-const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
   e.preventDefault();
   if (!validateForm()) return;
 
