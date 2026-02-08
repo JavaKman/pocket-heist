@@ -5,7 +5,8 @@
       "mcp__context7__resolve-library-id",
       "mcp__context7__query-docs",
       "mcp__figma__get_design_context",
-      "mcp__figma__get_screenshot"
+      "mcp__figma__get_screenshot",
+      "Bash(npx firebase deploy:*)"
     ]
   }
 }

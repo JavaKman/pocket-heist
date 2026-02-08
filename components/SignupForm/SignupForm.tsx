@@ -1,13 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { createUserWithEmailAndPassword } from "firebase/auth"
+import { auth } from "@/lib/firebase"
 import Input from "@/components/Input"
 import PasswordInput from "@/components/PasswordInput"
 import Button from "@/components/Button"
 import styles from "./SignupForm.module.css"
 
 export default function SignupForm() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -55,11 +59,25 @@ export default function SignupForm() {
 
     setLoading(true)
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log("Signup submitted:", formData)
+    try {
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      // Redirect to heists page on successful signup
+      router.push("/heists")
+    } catch (error: any) {
+      // Handle Firebase auth errors
+      let errorMessage = "Failed to create account. Please try again."
+
+      if (error.code === "auth/email-already-in-use") {
+        errorMessage = "An account with this email already exists"
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage = "Invalid email address"
+      } else if (error.code === "auth/weak-password") {
+        errorMessage = "Password is too weak. Please use a stronger password."
+      }
+
+      setErrors({ ...errors, email: error.code === "auth/email-already-in-use" ? errorMessage : "", password: error.code !== "auth/email-already-in-use" ? errorMessage : "" })
       setLoading(false)
-    }, 1000)
+    }
   }
 
   return (

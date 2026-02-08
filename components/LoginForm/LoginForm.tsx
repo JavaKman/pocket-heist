@@ -1,13 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { signInWithEmailAndPassword } from "firebase/auth"
+import { auth } from "@/lib/firebase"
 import Input from "@/components/Input"
 import PasswordInput from "@/components/PasswordInput"
 import Button from "@/components/Button"
 import styles from "./LoginForm.module.css"
 
 export default function LoginForm() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -52,11 +56,27 @@ export default function LoginForm() {
 
     setLoading(true)
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log("Login submitted:", formData)
+    try {
+      await signInWithEmailAndPassword(auth, formData.email, formData.password)
+      // Redirect to heists page on successful login
+      router.push("/heists")
+    } catch (error: any) {
+      // Handle Firebase auth errors
+      let errorMessage = "Failed to log in. Please try again."
+
+      if (error.code === "auth/invalid-credential") {
+        errorMessage = "Invalid email or password"
+      } else if (error.code === "auth/user-not-found") {
+        errorMessage = "No account found with this email"
+      } else if (error.code === "auth/wrong-password") {
+        errorMessage = "Incorrect password"
+      } else if (error.code === "auth/too-many-requests") {
+        errorMessage = "Too many failed attempts. Please try again later."
+      }
+
+      setErrors({ ...errors, password: errorMessage })
       setLoading(false)
-    }, 1000)
+    }
   }
 
   return (
