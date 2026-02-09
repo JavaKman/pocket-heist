@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "@/lib/firebase";
+import { generateCodename } from "@/lib/auth/codename";
 import Input from "@/components/Input";
 import PasswordInput from "@/components/PasswordInput";
 import Button from "@/components/Button";
@@ -60,8 +62,33 @@ export default function SignupForm() {
     setLoading(true);
 
     try {
-      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-      // Redirect to heists page on successful signup
+      // Step 1: Create Firebase Auth account
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+
+      // Step 2: Generate codename
+      const codename = generateCodename();
+
+      // Step 3: Update Firebase Auth profile with codename
+      await updateProfile(userCredential.user, {
+        displayName: codename,
+      });
+
+      // Step 4: Create Firestore user document (fail gracefully)
+      try {
+        await setDoc(doc(db, "users", userCredential.user.uid), {
+          id: userCredential.user.uid,
+          codename: codename,
+        });
+      } catch (firestoreError) {
+        // Log error but don't block signup flow
+        console.error("Failed to create Firestore user document:", firestoreError);
+      }
+
+      // Step 5: Redirect to heists page
       router.push("/heists");
     } catch (error: any) {
       // Handle Firebase auth errors

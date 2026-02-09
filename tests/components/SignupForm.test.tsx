@@ -14,10 +14,21 @@ vi.mock("next/navigation", () => ({
 // Mock Firebase auth
 vi.mock("@/lib/firebase", () => ({
   auth: {},
+  db: {},
 }))
 
 vi.mock("firebase/auth", () => ({
   createUserWithEmailAndPassword: vi.fn(),
+  updateProfile: vi.fn(),
+}))
+
+vi.mock("firebase/firestore", () => ({
+  doc: vi.fn(),
+  setDoc: vi.fn(),
+}))
+
+vi.mock("@/lib/auth/codename", () => ({
+  generateCodename: vi.fn(() => "MockCodename"),
 }))
 
 describe("SignupForm", () => {
@@ -82,8 +93,16 @@ describe("SignupForm", () => {
   })
 
   it("submits form with valid data", async () => {
-    const { createUserWithEmailAndPassword } = await import("firebase/auth")
-    vi.mocked(createUserWithEmailAndPassword).mockResolvedValue({} as any)
+    const { createUserWithEmailAndPassword, updateProfile } = await import("firebase/auth")
+    const { doc, setDoc } = await import("firebase/firestore")
+
+    const mockUser = { uid: "test-uid-123", email: "test@example.com" }
+    vi.mocked(createUserWithEmailAndPassword).mockResolvedValue({
+      user: mockUser,
+    } as any)
+    vi.mocked(updateProfile).mockResolvedValue()
+    vi.mocked(doc).mockReturnValue("mock-doc-ref" as any)
+    vi.mocked(setDoc).mockResolvedValue()
 
     const user = userEvent.setup()
     render(<SignupForm />)
@@ -103,6 +122,17 @@ describe("SignupForm", () => {
   })
 
   it("disables form during submission", async () => {
+    const { createUserWithEmailAndPassword, updateProfile } = await import("firebase/auth")
+    const { doc, setDoc } = await import("firebase/firestore")
+
+    const mockUser = { uid: "test-uid-123", email: "test@example.com" }
+    vi.mocked(createUserWithEmailAndPassword).mockResolvedValue({
+      user: mockUser,
+    } as any)
+    vi.mocked(updateProfile).mockResolvedValue()
+    vi.mocked(doc).mockReturnValue("mock-doc-ref" as any)
+    vi.mocked(setDoc).mockResolvedValue()
+
     const user = userEvent.setup()
     render(<SignupForm />)
 
