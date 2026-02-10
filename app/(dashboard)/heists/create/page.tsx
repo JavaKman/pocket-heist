@@ -1,9 +1,13 @@
+import CreateHeistForm from "@/components/CreateHeistForm";
+
 export default function CreateHeistPage() {
   return (
     <div className="center-content">
       <div className="page-content">
-        <h2 className="form-title">Create a New Heist</h2>
+        <h2 className="form-title mb-6">Create a New Heist</h2>
+
+        <CreateHeistForm />
       </div>
     </div>
-  )
+  );
 }

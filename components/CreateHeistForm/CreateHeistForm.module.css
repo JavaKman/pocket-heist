@@ -1,0 +1,21 @@
+@reference "../../app/globals.css";
+
+.form {
+  @apply w-full max-w-md mx-auto;
+}
+
+.loadingMessage {
+  @apply text-center text-body;
+}
+
+.errorMessage {
+  @apply text-center text-error;
+}
+
+.noUsersMessage {
+  @apply text-center text-body;
+}
+
+.generalError {
+  @apply text-error text-sm text-center mb-4;
+}

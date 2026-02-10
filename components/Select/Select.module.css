@@ -1,0 +1,23 @@
+@reference "../../app/globals.css";
+
+.selectGroup {
+  @apply flex flex-col gap-1 mb-4;
+}
+
+.label {
+  @apply text-sm font-medium text-heading;
+}
+
+.select {
+  @apply px-4 py-2 rounded-lg bg-lighter border border-lighter text-heading;
+  @apply focus:outline-none focus:border-primary;
+  @apply cursor-pointer;
+}
+
+.select.hasError {
+  @apply border-error;
+}
+
+.error {
+  @apply text-error text-sm;
+}
