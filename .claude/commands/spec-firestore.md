@@ -1,6 +1,8 @@
 ---
-name: firestore-schemas
-description: Firestore type conventions and patterns for Typescript projects. Use when: (1) Creating new Firestore document types, (2) Defining collection schemas, (3) Implementing serialization/converters, (4) Setting up type-safe Firestore queries, or (5) Working with Firestore timestamps and type patterns.
+description: Firestore type conventions and patterns for Typescript projects.
+allowed-tools: Read, Write, Glob
+examples:
+  - "set up types/schemas for Heist Firestore documents with title, description, createdBy, deadline, finalStatus."
 ---
 
 # File Location
