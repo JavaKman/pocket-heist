@@ -48,6 +48,8 @@ From `$ARGUMENTS`, extract:
 
 If `figma_hint` is present and Figma MCP tools are available:
 
+Use the **figma-design-extractor** subagent to provide a design guide for the future, citing the `figma_hint` and tell it to:
+
 1. Use the Figma MCP tools to locate the component, layer or frame.
 2. Extract only information that is useful for implementation, such as:
    - Dimensions and layout (grid, spacing, alignment)
