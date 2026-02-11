@@ -1,0 +1,74 @@
+@reference "../../app/globals.css";
+
+.card {
+  @apply bg-lighter rounded-lg p-4 border border-lighter;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.header {
+  @apply mb-3;
+}
+
+.title {
+  @apply text-lg font-semibold text-heading mb-0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.titleLink {
+  @apply text-heading no-underline transition-colors;
+}
+
+.titleLink:hover {
+  @apply text-secondary;
+}
+
+.description {
+  @apply text-body text-sm mb-4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.assigneeSection {
+  @apply flex items-center gap-2 mb-2;
+}
+
+.icon {
+  @apply text-body;
+}
+
+.assigneeLabel {
+  @apply text-body text-xs;
+}
+
+.assigneeName {
+  @apply text-heading text-sm font-medium;
+}
+
+.hoursLeftSection {
+  @apply mb-3;
+}
+
+.hoursLeft {
+  @apply text-primary text-sm font-semibold;
+}
+
+.deadlineSection {
+  @apply flex items-center gap-2 text-body text-sm;
+}
+
+.statusBadge {
+  @apply inline-block px-3 py-1 rounded-full text-xs font-semibold text-heading mt-3;
+}
+
+.statusSuccess {
+  background-color: var(--color-success);
+}
+
+.statusFailure {
+  background-color: var(--color-error);
+}
