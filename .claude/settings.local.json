@@ -3,13 +3,12 @@
     "allow": [
       "Bash(ls:*)",
       "Bash(npm test:*)",
-      "Bash(git switch:*)",
       "Bash(npx firebase deploy:*)",
       "mcp__context7__resolve-library-id",
       "mcp__context7__query-docs",
       "mcp__figma__get_design_context",
       "mcp__figma__get_screenshot",
-      "webSearch"
+      "WebSearch"
     ]
   },
   "enabledPlugins": {
