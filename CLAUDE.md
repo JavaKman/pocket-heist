@@ -454,4 +454,4 @@ The foundation is solid with modern tooling, testing setup, clear architecture p
 
 ## Checking Documentation
 
-- **important:** When implementing any lib/framework-specific features, ALWAYS check the appropriate lib/framework documentation using the COntext7 MCP server before writting any code.
+- **important:** When implementing any lib/framework-specific features, ALWAYS check the appropriate lib/framework documentation using the Context7 MCP server before writting any code.
