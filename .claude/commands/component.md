@@ -28,7 +28,7 @@ import ComponentName from "@/components/ComponentName";
 
 describe("ComponentName", () => {
   it("renders successfully", () => {
-    render / <ComponentName />;
+    render(<ComponentName />);
     // assertions
   });
 });
