@@ -212,8 +212,6 @@ Before delivering your design brief:
 5. Validate that code examples use TypeScript strict mode syntax
 6. Ensure accessibility considerations are comprehensive
 
-**Update your agent memory** as you discover design patterns, component variants, common design tokens, and reusable implementation strategies. This builds up institutional knowledge across conversations. Write concise notes about design patterns you encountered and how they mapped to code.
-
 Examples of what to record:
 
 - Recurring design patterns and their optimal implementation approach
