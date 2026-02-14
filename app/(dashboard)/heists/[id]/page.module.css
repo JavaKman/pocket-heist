@@ -1,0 +1,113 @@
+@reference "../../../globals.css";
+
+.heistDetails {
+  @apply bg-light rounded-lg p-6 md:p-8;
+}
+
+.header {
+  @apply mb-8 pb-6 border-b border-lighter;
+}
+
+.title {
+  @apply text-3xl md:text-4xl font-bold mb-4 text-heading;
+}
+
+.timeRemaining {
+  @apply inline-flex items-center gap-3 bg-lighter px-4 py-2 rounded-lg;
+}
+
+.timeRemaining.expired {
+  @apply bg-error/20;
+}
+
+.label {
+  @apply text-body font-medium;
+}
+
+.timer {
+  @apply text-2xl font-bold text-primary;
+}
+
+.expired .timer {
+  @apply text-error;
+}
+
+.participants {
+  @apply grid md:grid-cols-2 gap-6 mb-8;
+}
+
+.participant {
+  @apply bg-lighter rounded-lg p-4;
+}
+
+.participantLabel {
+  @apply block text-sm text-body mb-3 font-medium;
+}
+
+.participantInfo {
+  @apply flex items-center gap-3;
+}
+
+.participantName {
+  @apply text-heading font-medium text-lg;
+}
+
+.description {
+  @apply mb-8;
+}
+
+.sectionTitle {
+  @apply text-xl font-bold mb-4 text-heading;
+}
+
+.descriptionText {
+  @apply text-body leading-relaxed bg-lighter rounded-lg p-4;
+}
+
+.deadline {
+  @apply flex flex-col md:flex-row md:items-center gap-2 md:gap-4 bg-lighter rounded-lg p-4;
+}
+
+.deadlineLabel {
+  @apply text-sm text-body font-medium;
+}
+
+.deadlineDate {
+  @apply text-heading font-medium;
+}
+
+.notFound {
+  @apply text-center py-12;
+}
+
+.notFound h2 {
+  @apply text-2xl font-bold mb-2 text-heading;
+}
+
+.notFound p {
+  @apply text-body;
+}
+
+.loading {
+  @apply flex justify-center items-center py-12;
+}
+
+.statusSection {
+  @apply flex flex-col md:flex-row md:items-center gap-2 md:gap-4 bg-lighter rounded-lg p-4;
+}
+
+.statusLabel {
+  @apply text-sm text-body font-medium;
+}
+
+.status {
+  @apply font-bold text-lg;
+}
+
+.statusSuccess {
+  @apply text-success;
+}
+
+.statusFailure {
+  @apply text-error;
+}
