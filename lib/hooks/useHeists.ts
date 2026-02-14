@@ -96,7 +96,7 @@ export function useHeists(filterType: HeistFilterType): UseHeistsReturn {
       q,
       (snapshot) => {
         if (!isMounted) return;
-        const heistData = snapshot.docs.map((doc) => doc.data());
+        const heistData = snapshot.docs.map((doc) => doc.data() as Heist);
         setHeists(heistData);
         setLoading(false);
       },

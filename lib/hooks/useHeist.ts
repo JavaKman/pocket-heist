@@ -60,7 +60,7 @@ export function useHeist(heistId: string | null | undefined): UseHeistReturn {
         if (!isMounted) return;
 
         if (snapshot.exists()) {
-          setHeist(snapshot.data());
+          setHeist(snapshot.data() as Heist);
           setError(null);
         } else {
           setHeist(null);
